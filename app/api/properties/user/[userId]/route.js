@@ -11,7 +11,7 @@ export const GET = async (request, {params}) => {
             status:400
         })
       }
-      const properties = await Property.find({});
+      const properties = await Property.find({owner: userId});
       return new Response(JSON.stringify(properties), {
         status: 200,
         
