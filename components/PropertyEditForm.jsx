@@ -124,9 +124,9 @@ const PropertyEditForm = () => {
     }
   };
   return (
-    // {loading && <Spinner loading={loading} />}
-    mounted &&
-    !loading && (
+    <>
+      {loading && <Spinner loading={loading} />}
+      mounted && !loading && (
       <form onSubmit={handleSubmit}>
         <h2 className="text-3xl text-center font-semibold mb-6">
           Edit Property
@@ -583,7 +583,8 @@ const PropertyEditForm = () => {
           </button>
         </div>
       </form>
-    )
+      )
+    </>
   );
 };
 
