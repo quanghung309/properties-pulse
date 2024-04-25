@@ -5,8 +5,6 @@ import { fetchProperties } from "@/utils/requests";
 import PropertySearchForm from "@/components/PropertySearchForm";
 const PropertiesPages = async () => {
   const properties = await fetchProperties();
-  console.log(properties);
-  // sort properties by date
   properties.sort((a, b) => new Date(b.createAt) - new Date(a.createAt));
   // console.log(properties);
   return (

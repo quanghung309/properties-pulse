@@ -12,7 +12,8 @@ const BookmarkButton = ({ property }) => {
   useEffect(() => {
     const checkBookmarkStatus = async () => {
       if (!userId) {
-        toast.error("You need to sign in to bookmark a property");
+        setLoading(false);
+        // toast.error("You need to sign in to bookmark a property");
         return;
       }
       try {
@@ -39,6 +40,7 @@ const BookmarkButton = ({ property }) => {
   }, [property._id, userId]);
   const handleClick = async () => {
     if (!userId) {
+      toast.error("You need to sign in to bookmark a property");
       setLoading(false);
       return;
     }
