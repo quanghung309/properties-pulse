@@ -6,13 +6,22 @@ import cloudinary from "@/config/cloudinary";
 export const GET = async (request) => {
   try {
     await connectDB();
-    
-    const properties = await Property.find({});
-    return new Response(JSON.stringify(properties), {
+
+    const page = request.nextUrl.searchParams.get("page") || 1;
+    const pageSize = request.nextUrl.searchParams.get("pageSize") || 6;
+    const skip = (page -1) * pageSize;
+
+    const total = await Property.countDocuments({});
+    const properties = await Property.find({}).skip(skip).limit(pageSize);
+    const result = {
+      total,
+      properties,
+    }
+
+    return new Response(JSON.stringify(result), {
       status: 200,
       
     });
-    
   } catch (error) {
     console.log(error);
     return new Response("Something Went Wrong", { status: 500 });
